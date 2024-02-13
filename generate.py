@@ -4,31 +4,28 @@ length = 1
 width = 1
 height = 1
 
-x = 0
-y = 0
-z = 0.5
-
-pyrosim.Start_SDF("boxes.sdf")
-
-hMod = 0
-lMod = 0
-wMod = 0
-sMod = 1.0
-
-for c in range (0, 5):
-    for r in range (0, 5):
-        for i in range (0, 10):
-            pyrosim.Send_Cube(name="Box"+str(c)+"-"+str(r)+"-"+str(i), 
-                              pos=[x+lMod,y+wMod,z+hMod] , 
-                              size=[length*sMod,width*sMod,height*sMod])
-            hMod = hMod + 1
-            sMod = sMod * 0.9
-        hMod = 0
-        sMod = 1.0
-        wMod = wMod + 1
-    wMod = 0
-    lMod = lMod + 1
+cx = -2
+cy = 2
+cz = 0.5
 
 
 
-pyrosim.End()
+def Create_World():
+    pyrosim.Start_SDF("world.sdf")
+    pyrosim.Send_Cube(name="Box", pos=[cx,cy,cz], size=[length,width,height])
+    pyrosim.End()
+    return
+
+def Create_Robot():
+    pyrosim.Start_URDF("body.urdf")
+    pyrosim.Send_Cube(name="Torso", pos=[0,0,1.5], size=[length,width,height])
+    pyrosim.Send_Joint( name = "Torso_BackLeg" , parent= "Torso" , child = "BackLeg" , type = "revolute", position = [-0.5,0,1])
+    pyrosim.Send_Cube(name="BackLeg", pos=[-0.5,0,-0.5], size=[length,width,height])
+    pyrosim.Send_Joint( name = "Torso_FrontLeg" , parent= "Torso" , child = "FrontLeg" , type = "revolute", position = [0.5,0,1])
+    pyrosim.Send_Cube(name="FrontLeg", pos=[0.5,0,-0.5], size=[length,width,height])
+    pyrosim.End()
+    return
+
+
+Create_World()
+Create_Robot()
