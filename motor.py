@@ -20,11 +20,11 @@ class MOTOR:
             self.target_angles = np.sin(self.frequency*sinx/2 + self.phase) * self.amplitude
         #np.save("data/" + self.jointName + "_targets", self.target_angles)
 
-    def Set_Value(self, index, id):
+    def Set_Value(self, angle, id):
         pyro.Set_Motor_For_Joint(
                 bodyIndex = id,
                 jointName = self.jointName,
                 controlMode = p.POSITION_CONTROL,
-                targetPosition = self.target_angles[index],
+                targetPosition = angle,
                 maxForce = c.maxMotorForce)
     

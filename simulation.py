@@ -23,6 +23,7 @@ class SIMULATION:
         for i in range (0, c.duration):
             p.stepSimulation()
             self.robot.Sense(i)
+            self.robot.Think()
             self.robot.Act(i)
             """backLegSensorValues[i] = pyro.Get_Touch_Sensor_Value_For_Link("BackLeg")
             frontLegSensorValues[i] = pyro.Get_Touch_Sensor_Value_For_Link("FrontLeg")
