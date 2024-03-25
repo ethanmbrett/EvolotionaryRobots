@@ -12,3 +12,4 @@ gravScaleZ = -9.8
 timeStep = 0.016
 duration = 1000
 maxMotorForce = 500
+numberOfGenerations = 10

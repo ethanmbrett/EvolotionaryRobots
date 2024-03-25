@@ -9,8 +9,13 @@ import pybullet_data
 
 class SIMULATION:
 
-    def __init__(self) -> None:
-        self.physicsClient = p.connect(p.GUI)
+    def __init__(self, directOrGUI) -> None:
+        if(directOrGUI == "DIRECT"):
+            self.physicsClient = p.connect(p.DIRECT)
+            self.timescale = 0.0
+        else:
+            self.physicsClient = p.connect(p.GUI)
+            self.timescale = c.timeStep
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(c.gravScaleX,c.gravScaleY,c.gravScaleZ)
         self.world = WORLD()
@@ -34,4 +39,7 @@ class SIMULATION:
                 controlMode = p.POSITION_CONTROL,
                 targetPosition = FLtargetAngles[i],
                 maxForce = c.maxMotorForce)"""
-            t.sleep(c.timeStep)
+            t.sleep(self.timescale)
+
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
