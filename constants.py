@@ -13,3 +13,4 @@ timeStep = 0.016
 duration = 1000
 maxMotorForce = 500
 numberOfGenerations = 10
+populationSize = 10

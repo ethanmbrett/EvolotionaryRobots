@@ -9,7 +9,7 @@ import pybullet_data
 
 class SIMULATION:
 
-    def __init__(self, directOrGUI) -> None:
+    def __init__(self, directOrGUI, id) -> None:
         if(directOrGUI == "DIRECT"):
             self.physicsClient = p.connect(p.DIRECT)
             self.timescale = 0.0
@@ -19,7 +19,7 @@ class SIMULATION:
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(c.gravScaleX,c.gravScaleY,c.gravScaleZ)
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(id)
 
     def __del__(self):
         p.disconnect()
