@@ -21,7 +21,7 @@ class SOLUTION:
         else:
             os.system("python simulate.py GUI")
         f = open("fitness.txt", "r")
-        self.fitness = float(f.read())
+        self.fitness = float(f.read()) * -1
         f.close()
 
 
